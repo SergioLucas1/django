@@ -17,5 +17,9 @@ class Post(models.Model):
     alterado = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS, default='rascunho')
 
+    class Meta:
+        ordering = ('-publicado',)
+
+
     def __str__(self):
         return self.titulo
