@@ -3,6 +3,10 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 # Create your models here.
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset().filter(satus='publicado')
+
 class Post(models.Model):
     titulo = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
@@ -16,6 +20,8 @@ class Post(models.Model):
     criado = models.DateTimeField(auto_now_add=True)
     alterado = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS, default='rascunho')
+    objects  = models.Manager()
+    published = PublishedManager()
 
     class Meta:
         ordering = ('-publicado',)
@@ -23,3 +29,4 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+
