@@ -1,1 +1,1 @@
-# Site feito em Django
+# Blog em Django
